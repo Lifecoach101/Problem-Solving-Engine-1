@@ -1,19 +1,21 @@
 import streamlit as st
 from groq import Groq
 
+st.set_page_config(page_title="Universal Problem Solver", page_icon="🚀")
 st.title("Universal Problem Solver")
+
 api_key = st.text_input("Enter Groq API Key", type="password")
 
 if api_key:
     try:
         client = Groq(api_key=api_key)
-        problem = st.text_area("Problem likho:")
+        # Updated label to English
+        problem = st.text_area("Enter your problem:")
         
         if st.button("Solve"):
             if not problem:
                 st.warning("Please enter a problem first.")
             else:
-                # Updated Master Prompt with Aggressive Growth Strategy
                 system_prompt = """
                 You are a World-Class Organizational Consultant. For every user problem, execute these 5 steps with precision:
                 
