@@ -16,9 +16,10 @@ if api_key:
                 system_prompt = "You are an expert Organizational Consultant. Follow these 4 steps: 1. Definition (A to B). 2. 5 Creative Solutions. 3. Best Selection. 4. 5-step Implementation. Respond in Roman Punjabi."
                 
                 with st.spinner("Solving..."):
+                    # Naya model use kar rahe haan jo active hai
                     chat_completion = client.chat.completions.create(
                         messages=[{"role": "system", "content": system_prompt}, {"role": "user", "content": problem}],
-                        model="llama3-8b-8192", # Llama3-8b model zyada fast aur stable hai
+                        model="llama-3.1-8b-instant", 
                     )
                     st.write(chat_completion.choices[0].message.content)
     except Exception as e:
