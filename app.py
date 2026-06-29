@@ -13,9 +13,9 @@ if api_key:
             if not problem:
                 st.warning("Please enter a problem first.")
             else:
-system_prompt = "You are an expert Organizational Consultant. Follow these 4 steps: 1. Definition (A to B). 2. 5 Creative Solutions. 3. Best Selection. 4. 5-step Implementation. Respond in English."                
+                system_prompt = "You are an expert Organizational Consultant. Follow these 4 steps: 1. Definition (A to B). 2. 5 Creative Solutions. 3. Best Selection. 4. 5-step Implementation. Respond in English."
+                
                 with st.spinner("Solving..."):
-                    # Naya model use kar rahe haan jo active hai
                     chat_completion = client.chat.completions.create(
                         messages=[{"role": "system", "content": system_prompt}, {"role": "user", "content": problem}],
                         model="llama-3.1-8b-instant", 
