@@ -1,36 +1,36 @@
 import streamlit as st
 from groq import Groq
 
-st.set_page_config(page_title="Universal Problem Solver", page_icon="🚀")
-st.title("Universal Problem Solver")
+# Page configuration for a professional look
+st.set_page_config(page_title="McKinsey Strategy Engine", page_icon="📈")
+st.title("McKinsey Strategy Engine")
 
 api_key = st.text_input("Enter Groq API Key", type="password")
 
 if api_key:
     try:
         client = Groq(api_key=api_key)
-        # Updated label to English
-        problem = st.text_area("Enter your problem:")
+        problem = st.text_area("Enter your strategic problem for McKinsey-level analysis:")
         
-        if st.button("Solve"):
+        if st.button("Generate Strategy"):
             if not problem:
                 st.warning("Please enter a problem first.")
             else:
+                # Upgraded McKinsey-Style System Prompt
                 system_prompt = """
-                You are a World-Class Organizational Consultant. For every user problem, execute these 5 steps with precision:
-                
-                1. DEFINITION (Business Analyst Persona): Clearly define the 'Current State' vs 'Desired State'. Identify root causes.
-                2. GENERATION (Innovation Strategist Persona): Provide 10 unconventional, out-of-the-box solutions using 'First Principles Thinking'.
-                3. SELECTION (CEO/CTO Persona): Use the 'ICE Framework' (Impact, Confidence, Ease) to select the single best solution.
-                4. IMPLEMENTATION (Operations Manager Persona): Provide 5 concrete, actionable steps with a KPI for each to measure success within 30 days.
-                5. JUSTIFICATION (Management Consultant Persona): Provide an Executive Summary explaining the high ROI and risk mitigation.
-                
-                Be aggressive in your selection. Prioritize scalability over ease of implementation. Focus on 10x growth, not 10% growth.
-                
-                FORMAT: Use professional headings (###) and bullet points for each step. Respond in clear, professional English.
+                You are a Senior Strategy Consultant at McKinsey & Company. Your goal is to provide high-level, board-room ready strategic advice. 
+                Apply the following rigor to every user problem:
+
+                1. THE PYRAMID PRINCIPLE: Start immediately with the Executive Summary/Recommendation. Focus on the answer first.
+                2. MECE FRAMEWORK: Ensure all analyses are Mutually Exclusive and Collectively Exhaustive. Eliminate logical gaps.
+                3. FIRST PRINCIPLES & ECONOMIC LOGIC: Challenge all underlying assumptions. Use Economic theory (Marginal Analysis, Opportunity Cost, ROI) to validate your solutions.
+                4. AGGRESSIVE SCALING: Prioritize strategies that offer 10x growth and structural competitive advantages. Avoid incremental advice.
+                5. RIGOROUS EXECUTION: Provide a 30-day "Critical Path" with quantifiable KPIs that track success.
+
+                STRUCTURE: Use bold headings (###), professional tables where appropriate, and bullet points. Use 'McKinsey-style' clear, concise, and analytical language.
                 """
                 
-                with st.spinner("Analyzing your problem with expert strategies..."):
+                with st.spinner("Applying McKinsey strategic rigor..."):
                     chat_completion = client.chat.completions.create(
                         messages=[
                             {"role": "system", "content": system_prompt}, 
