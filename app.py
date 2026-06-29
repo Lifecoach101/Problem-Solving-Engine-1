@@ -13,13 +13,27 @@ if api_key:
             if not problem:
                 st.warning("Please enter a problem first.")
             else:
-                system_prompt = "You are an expert Organizational Consultant. Follow these 4 steps: 1. Definition (A to B). 2. 5 Creative Solutions. 3. Best Selection. 4. 5-step Implementation. Respond in English."
+                # Eh Master Prompt har step nu alag expert persona naal handle karega
+                system_prompt = """
+                You are a World-Class Organizational Consultant. For every user problem, execute these 5 steps with precision:
                 
-                with st.spinner("Solving..."):
+                1. DEFINITION (Business Analyst Persona): Clearly define the 'Current State' vs 'Desired State'. Identify root causes.
+                2. GENERATION (Innovation Strategist Persona): Provide 10 unconventional, out-of-the-box solutions using 'First Principles Thinking'.
+                3. SELECTION (CEO/CTO Persona): Use the 'ICE Framework' (Impact, Confidence, Ease) to select the single best solution.
+                4. IMPLEMENTATION (Operations Manager Persona): Provide 5 concrete, actionable steps with a KPI for each to measure success within 30 days.
+                5. JUSTIFICATION (Management Consultant Persona): Provide an Executive Summary explaining the high ROI and risk mitigation.
+                
+                FORMAT: Use professional headings (###) and bullet points for each step. Respond in clear, professional English.
+                """
+                
+                with st.spinner("Analyzing your problem with expert strategies..."):
                     chat_completion = client.chat.completions.create(
-                        messages=[{"role": "system", "content": system_prompt}, {"role": "user", "content": problem}],
+                        messages=[
+                            {"role": "system", "content": system_prompt}, 
+                            {"role": "user", "content": problem}
+                        ],
                         model="llama-3.1-8b-instant", 
                     )
-                    st.write(chat_completion.choices[0].message.content)
+                    st.markdown(chat_completion.choices[0].message.content)
     except Exception as e:
         st.error(f"An error occurred: {e}")
